@@ -13,3 +13,5 @@ This project is a starting point for a Web application.- [프로젝트 메인 �
 ## 3주차 수업 부트스트랩 적용 완료! (문제 포함)
 
 ## 4주차 수업 자바스크립트 적용 완료! (문제 제외)
+
+## 5주차 수업 자바스크립트 적용 완료! (공백 문제 포함)
