@@ -15,3 +15,5 @@ This project is a starting point for a Web application.- [프로젝트 메인 �
 ## 4주차 수업 자바스크립트 적용 완료! (문제 포함)
 
 ## 5주차 수업 자바스크립트 적용 완료! (문제 포함)
+
+## 6주차 수업 자바스크립트 적용 완료!

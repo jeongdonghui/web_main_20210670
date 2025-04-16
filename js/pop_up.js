@@ -1,3 +1,23 @@
+/*
+var close_time //시간 정보
+var close_time2 = 10; //10초 설정
+
+clearTimeout(close_time); //재호출 정지
+close_time = setTimeout("close_window(), 10000");
+// 1/1000초 지정, 바로 시작
+show_time(); //실시간 시간 보여주기
+
+function show_time(){
+        let divClock = document.getElementByld('Time');
+        divClock.innerText = close_tiem2; //10초 삽입 시작
+    close_time2--; //1초씩감소
+    setTimeout(show_time, 1000); //1초마다 갱신
+}LO
+
+function close_window(){ //함수 정의
+    window.close(); //윈도우 닫기
+}*/
+
 function pop_up() {
     window.open("../popup/popup.html", "팝업테스트", "width = 400, height = 300, top=10, left=10");
     // ../ 들어가는 이유 : 한 단계 위 상위 폴더로 가기 위해서 사용함. 2번 나가야 할 시 ../../ 사용
@@ -30,3 +50,7 @@ function over(obj) {
 function out(obj) {
     obj.src="image/logo_coupang_w350.png";
 }
+
+//const over = (obj) => {
+//    obj.src = "image/LOGO01.jpg";
+//};
