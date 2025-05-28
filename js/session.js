@@ -29,10 +29,21 @@ export function session_get() { //세션 읽기
     }
 }
 
-export function session_check() { //세션 검사
-    if (sessionStorage.getItem("Session_Storage_id")) {
-        alert("이미 로그인 되었습니다.");
-        location.href='../login/index_login.html'; // 로그인된 페이지로 이동
+export function session_check() {
+    const storedId = sessionStorage.getItem("Session_Storage_id");
+    const jwtToken = localStorage.getItem("jwt_token");
+
+    if (storedId && jwtToken) {
+        const payload = verifyJWT(jwtToken);
+
+        if (payload) {
+            alert("이미 로그인 되었습니다.");
+            location.href = '../login/index_login.html';
+        } else {
+            // 토큰이 만료됐거나 유효하지 않으면 세션 초기화
+            sessionStorage.clear();
+            localStorage.removeItem("jwt_token");
+        }
     }
 }
 
@@ -47,7 +58,7 @@ function session_del() {//세션 삭제
 
 export function session_set2(obj){
     if (sessionStorage){
-        const dbjString = JSON.stringify(obj);
+        const objString = JSON.stringify(obj);
         sessionStorage.setItem("Session_Storage_join", objString);
     } else{
         alert("세션 스토리지 지원 x");
