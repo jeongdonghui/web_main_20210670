@@ -1,4 +1,3 @@
-// login.js 전체 코드 (토큰 사용 포함, 로그인/로그아웃 횟수 포함)
 import { session_set, session_get, session_check } from './session.js';
 import { encrypt_text, decrypt_text } from './crypto.js';
 import { generateJWT, checkAuth } from './jwt_token.js';
@@ -14,9 +13,9 @@ function init() {
     session_check();
 }
 
- document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     init();
- });
+});
 
 function init_logined() {
     if (sessionStorage) {
@@ -137,7 +136,21 @@ const check_input = () => {
         return;
     }
 
-    const isLoginOk = (emailValue === "test@aa.com" && passwordValue === "1q2w3e4r!Q@W#E$R");
+    // ✅ 세션에서 회원가입된 사용자 정보 불러와 비교
+    const joinedInfoString = sessionStorage.getItem("Session_Storage_join");
+    let isLoginOk = false;
+
+    if (joinedInfoString) {
+        try {
+            const joinedInfo = JSON.parse(joinedInfoString);
+            const registeredEmail = joinedInfo._email;
+            const registeredPassword = joinedInfo._password;
+
+            isLoginOk = (emailValue === registeredEmail && passwordValue === registeredPassword);
+        } catch (e) {
+            console.error("세션 유저 정보 파싱 오류:", e);
+        }
+    }
 
     const payload = {
         id: emailValue,
@@ -162,6 +175,7 @@ const check_input = () => {
             setCookie("id", "", 0);
         }
 
+        sessionStorage.setItem("pass2", encrypt_text(passwordValue));
         session_set();
         localStorage.setItem('jwt_token', jwtToken);
         loginForm.submit();
